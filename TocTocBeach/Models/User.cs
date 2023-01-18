@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TocTocBeach.Models
 {
@@ -17,6 +18,9 @@ namespace TocTocBeach.Models
 
         [Required]
         public int UserTypeId { get; set; }
+
+        [ForeignKey("UserTypeId")]
+        public UserType Type { get; set; }
 
     }
 }
