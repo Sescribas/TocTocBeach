@@ -16,11 +16,8 @@ namespace TocTocBeach.Models
         [Required]
         public string Email { get; set; }
 
-        [Required]
+        [ForeignKeyAttribute("UserTypeId")]
         public int UserTypeId { get; set; }
-
-        [ForeignKey("UserTypeId")]
-        public UserType Type { get; set; }
 
     }
 }
