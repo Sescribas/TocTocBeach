@@ -1,5 +1,6 @@
 using TocTocBeach.Repository;
 using Microsoft.EntityFrameworkCore;
+using TocTocBeach.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +11,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection"),
                 optionsBuilder => optionsBuilder.MigrationsAssembly("TocTocBeach")));
 builder.Services.AddRazorPages();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
