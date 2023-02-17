@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using System.Reflection;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.OpenApi.Models;
+using System.Reflection.PortableExecutable;
+using System.Web.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "Toc Toc Beach API",
         Version = "v1",
-        Description = "Doesn't hurt to add some description."
+        Description = "Toc Toc Beach API for beach resorts, developed by a group of friends, provides a comprehensive platform for managing and promoting beach resort properties. The API allows resort owners and managers to easily create and maintain listings for their properties, as well as manage bookings and reservations.\r\n\r\nWith its intuitive interface, resort owners can quickly and easily update information about their properties, including photos, descriptions, and amenities. They can also view and manage bookings and reservations made through the platform, and keep track of occupancy and availability in real-time."
     });
 
     // Set the comments path for the Swagger JSON and UI.
@@ -43,6 +45,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 

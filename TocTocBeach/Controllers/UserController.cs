@@ -18,12 +18,11 @@ namespace TocTocBeach.Controllers
         }
 
         /// <summary>
-        /// Gets the price for a ticker symbol
+        /// Get all the user
         /// </summary>
-        /// <param name="tickerSymbol"></param>
-        /// <returns>A SharePriceResponse which contains the price of the share</returns>
-        /// <response code="200">Returns 200 and the share price</response>
-        /// <response code="400">Returns 400 if the query is invalid</response>
+        /// <returns>return a list with all available users</returns>
+        /// <response code="200">Returns 200 with a user list</response>
+        /// <response code="400">Returns 400 if doesn't have users in the database</response>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -31,6 +30,12 @@ namespace TocTocBeach.Controllers
             return Ok(users);
         }
 
+        /// <summary>
+        /// Get a user by id 
+        /// </summary>
+        /// <returns>return an user</returns>
+        /// <response code="200">Returns 200 with a user</response>
+        /// <response code="400">Returns 400 if the user not exist in the database</response>
         [HttpGet("{id:int}")]
         public IActionResult GetUser(int? id)
         {
@@ -41,8 +46,14 @@ namespace TocTocBeach.Controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// Create a user 
+        /// </summary>
+        /// <returns>return the user created</returns>
+        /// <response code="200">Returns 200 with a user created</response>
+        /// <response code="400">Returns 400 if if there was any problem with the registration</response>
         [HttpPost]
-        public IActionResult Create(User user)
+        public IActionResult Create([FromBody]User user)
         {
             if(user == null)
                 return BadRequest();
@@ -52,9 +63,14 @@ namespace TocTocBeach.Controllers
 
             return Ok(user);
         }
-
+        /// <summary>
+        /// Update a existing user
+        /// </summary>
+        /// <returns>return the user updated</returns>
+        /// <response code="200">Returns 200 with a user updated</response>
+        /// <response code="400">Returns 400 if if there was any problem with the registration</response>
         [HttpPatch(Name = "Update")]
-        public IActionResult Update(User user)
+        public IActionResult Update([FromBody] User user)
         {
             if (user == null)
                 return BadRequest();
@@ -65,6 +81,12 @@ namespace TocTocBeach.Controllers
             return Ok(user);
         }
 
+
+        /// <summary>
+        /// Delete a existing user
+        /// </summary>
+        /// <response code="200">Returns 200 with a user deleted</response>
+        /// <response code="400">Returns 400 if if there was any problem with the registration</response>
         [HttpDelete("{id:int}",Name = "Delete")]
         public IActionResult Delete(int? id)
         {
